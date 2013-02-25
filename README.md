@@ -10,6 +10,8 @@ The test suite has also been ported, with some changes to take into account diff
 
 In general, JavaScript's behavior is maintained, for example <code>true + " " + false</code> in JS evaluates to <code>"true false"</code>, whereas in PHP it would evaluate to <code>"1 "</code>.
 
+Requires (at least) PHP 5.4.
+
 To use:
 
 	<?php
