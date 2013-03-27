@@ -149,7 +149,7 @@ class Mark
 			}
 
 			// Evaluating an array, which might be a block expression.
-			else if (is_array($ctx)) {
+			else if (is_array($ctx) || $child) {
 				$result = self::_eval($ctx, $filters, $child);
 			}
 
