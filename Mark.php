@@ -406,6 +406,9 @@ class Mark
 			'limit' => function($arr, $count, $idx = 0) {
 				return array_slice($arr, $idx, $count);
 			},
+			'split' => function($str, $separator = ',') {
+				return explode($separator, $str);
+			},
 			'choose' => function($bool, $iffy, $elsy = false) {
 				if (!!$bool) return $iffy;
 				return $elsy ? $elsy : '';
