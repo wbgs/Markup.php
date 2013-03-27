@@ -31,6 +31,7 @@ $context = [
     'motto' => "life is like a box of chocolates",
     'obj' => [ 'truthy' => true, 'falsy' => false ],
     'chars' => [ ["a","b","c"], ["d","e","f"] ],
+    'splits' => "a,b,c and d",
 ];
 
 function beforeEach() {
@@ -389,6 +390,23 @@ it("resolves object self reference", function () use ($context) {
 //    $template = "Num: {{num}}{{.|call>toFixed>1}}{{/num}}";
 //    $result = Mark::up($template, [ 'num' => 123 ]);
 //    expect($result)->toEqual("Num: 123.0");
+});
+
+it("resolves string split into array", function () use ($context) {
+    $template = "{{splits|split}}";
+    $result = Mark::up($template, $context);
+    expect($result[0])->toEqual("a");
+    expect($result[1])->toEqual("b");
+    expect($result[2])->toEqual("c and d");
+
+    $template = "{{splits|split> and }}";
+    $result = Mark::up($template, $context);
+    expect($result[0])->toEqual("a,b,c");
+    expect($result[1])->toEqual("d");
+
+    $template = "{{splits|split|join> + }}";
+    $result = Mark::up($template, $context);
+    expect($result)->toEqual("a + b + c and d");
 });
 
 it("resolves multiple pipes on simple array", function () use ($context) {
