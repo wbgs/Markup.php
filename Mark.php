@@ -149,7 +149,7 @@ class Mark
 			}
 
 			// Evaluating an array, which might be a block expression.
-			else if (is_array($ctx)) {
+			else if (is_array($ctx) || $child) {
 				$result = self::_eval($ctx, $filters, $child);
 			}
 
@@ -405,6 +405,9 @@ class Mark
 			},
 			'limit' => function($arr, $count, $idx = 0) {
 				return array_slice($arr, $idx, $count);
+			},
+			'split' => function($str, $separator = ',') {
+				return explode($separator, $str);
 			},
 			'choose' => function($bool, $iffy, $elsy = false) {
 				if (!!$bool) return $iffy;
